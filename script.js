@@ -1,3 +1,32 @@
+// === Particle burst on click ===
+var burstEmojis = ['\uD83C\uDF53', '\uD83C\uDF6B', '\uD83C\uDF70', '\uD83C\uDF69', '\uD83D\uDC96', '\uD83C\uDF52'];
+function spawnBurst(x, y, count) {
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('span');
+    el.className = 'particle-burst';
+    el.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+    var angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5);
+    var dist = 40 + Math.random() * 60;
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+    el.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
+    el.style.setProperty('--rot', (Math.random() * 360 - 180) + 'deg');
+    el.style.fontSize = (0.7 + Math.random() * 0.8) + 'rem';
+    document.body.appendChild(el);
+    el.addEventListener('animationend', function() { this.remove(); });
+  }
+}
+
+// Global click particles — small burst on any click, bigger on buttons
+document.addEventListener('click', function(e) {
+  var isQty = e.target.closest('.qty-btn');
+  if (isQty) return; // qty buttons have their own burst
+  var isButton = e.target.closest('button, a, .submit-btn, .treat-card, .specials-image');
+  var count = isButton ? 5 : 2;
+  spawnBurst(e.clientX, e.clientY, count);
+});
+
 // === Gallery carousel ===
 var ITEMS_PER_PAGE = 6;
 var galleryPage = 0;
@@ -237,13 +266,79 @@ revealElements.forEach(function(el) {
     card.className = 'menu-card reveal delay-' + ((i % 6) + 1);
     var html = '<h3>' + cat.name + '</h3>';
     cat.items.forEach(function(item) {
+      var hasPrice = item.price && item.price.charAt(0) === '$';
       html += '<div class="menu-item">' +
         '<span class="menu-item-name">' + item.name + '</span>' +
         '<span class="menu-item-price">' + item.price + '</span>' +
+        (hasPrice ? '<div class="menu-qty-controls" data-item="' + item.name.replace(/"/g, '&quot;') + '">' +
+          '<button type="button" class="menu-qty-btn minus" data-dir="-1">−</button>' +
+          '<span class="menu-qty-value">0</span>' +
+          '<button type="button" class="menu-qty-btn plus" data-dir="1">+</button>' +
+        '</div>' : '') +
         '</div>';
     });
     card.innerHTML = html;
     grid.appendChild(card);
+  });
+  // Sync menu qty controls with cart quantities
+  window.syncMenuButtons = function() {
+    grid.querySelectorAll('.menu-qty-controls').forEach(function(ctrl) {
+      var itemName = ctrl.dataset.item;
+      for (var j = 0; j < orderItems.length; j++) {
+        if (orderItems[j].name === itemName) {
+          var qty = cart[j] || 0;
+          var valEl = ctrl.querySelector('.menu-qty-value');
+          valEl.textContent = qty;
+          ctrl.classList.toggle('has-items', qty > 0);
+          break;
+        }
+      }
+    });
+  };
+
+  // Handle +/- buttons on menu cards
+  grid.addEventListener('click', function(e) {
+    var btn = e.target.closest('.menu-qty-btn');
+    if (!btn) return;
+    var ctrl = btn.closest('.menu-qty-controls');
+    var itemName = ctrl.dataset.item;
+    var dir = parseInt(btn.dataset.dir);
+    for (var j = 0; j < orderItems.length; j++) {
+      if (orderItems[j].name === itemName) {
+        var current = cart[j] || 0;
+        var next = Math.max(0, current + dir);
+        if (next === 0) {
+          delete cart[j];
+        } else {
+          cart[j] = next;
+        }
+        // Update menu qty display
+        var valEl = ctrl.querySelector('.menu-qty-value');
+        valEl.textContent = next;
+        ctrl.classList.toggle('has-items', next > 0);
+        // Bump animation on value
+        valEl.classList.add('bump');
+        setTimeout(function() { valEl.classList.remove('bump'); }, 200);
+        // Sync order section
+        var qtyEl = document.getElementById('qty' + j);
+        var itemEl = document.getElementById('orderItem' + j);
+        if (qtyEl) qtyEl.textContent = next;
+        if (itemEl) {
+          itemEl.classList.toggle('active', next > 0);
+          itemEl.classList.add(dir > 0 ? 'pop' : 'shrink');
+          setTimeout(function() { itemEl.classList.remove('pop'); itemEl.classList.remove('shrink'); }, 200);
+        }
+        updateOrderSummary();
+        saveFormData();
+        // Clear cart error
+        var cartErr = document.getElementById('cartError');
+        if (Object.keys(cart).length > 0 && cartErr) {
+          cartErr.style.display = 'none';
+          cartErr.textContent = '';
+        }
+        break;
+      }
+    }
   });
   // Observe the new cards for scroll animation
   grid.querySelectorAll('.reveal').forEach(function(el) {
@@ -265,6 +360,8 @@ var orderItems = [];
     });
   });
   renderOrderItems();
+  loadFormData();
+  if (window.syncMenuButtons) syncMenuButtons();
 })();
 
 // === Delivery method toggle ===
@@ -330,15 +427,31 @@ function renderOrderItems() {
     var dir = parseInt(btn.dataset.dir);
     var current = cart[idx] || 0;
     var next = Math.max(0, current + dir);
+    // Burst particles from button
+    if (next !== current) {
+      var rect = btn.getBoundingClientRect();
+      spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, dir > 0 ? 8 : 4);
+    }
     if (next === 0) {
       delete cart[idx];
     } else {
       cart[idx] = next;
     }
-    document.getElementById('qty' + idx).textContent = next;
-    document.getElementById('orderItem' + idx).classList.toggle('active', next > 0);
+    var qtyEl = document.getElementById('qty' + idx);
+    var itemEl = document.getElementById('orderItem' + idx);
+    qtyEl.textContent = next;
+    itemEl.classList.toggle('active', next > 0);
+    // Pop animation
+    var popClass = dir > 0 ? 'pop' : 'shrink';
+    itemEl.classList.add(popClass);
+    qtyEl.classList.add('bump');
+    setTimeout(function() {
+      itemEl.classList.remove(popClass);
+      qtyEl.classList.remove('bump');
+    }, 200);
     updateOrderSummary();
-    saveFormData(); // Save cart data after it changes
+    saveFormData();
+    if (window.syncMenuButtons) syncMenuButtons();
     // Clear cart error when items added
     var cartErr = document.getElementById('cartError');
     var orderItemsContainer = document.getElementById('orderItems');
@@ -497,7 +610,7 @@ document.getElementById('phone').addEventListener('input', function(e) {
 // === Toast notifications ===
 var toastTimeout;
 function showToast(title, desc, isError) {
-  console.log('showToast called:', title, desc, isError); // Debugging line
+
   var toast = document.getElementById('toast');
   var toastTitle = document.getElementById('toastTitle');
   var toastDesc = document.getElementById('toastDesc');
@@ -540,7 +653,7 @@ function copyToClipboard(text, successMessage, errorMessage) {
 
 // Function to show the order confirmation modal
 function showOrderModal(title, message, emailContent) {
-  console.log('showOrderModal called:', title, message, emailContent); // Debugging line
+
   var modal = document.getElementById('orderModal');
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalMessage').textContent = message;
@@ -570,7 +683,7 @@ document.getElementById('modalCopyBtn').addEventListener('click', function() {
 
 function handleFormSubmit(e) {
   e.preventDefault();
-  console.log('handleFormSubmit invoked!'); // Debugging line
+
   var valid = true;
     var name = document.getElementById('name').value.trim();
     var phone = document.getElementById('phone').value.trim();
@@ -631,7 +744,6 @@ function handleFormSubmit(e) {
     var encodedBody = encodeURIComponent(body);
     var mailtoUrl = 'mailto:dippedndarling@gmail.com?subject=' + encodedSubject + '&body=' + encodedBody;
 
-    console.log('Generated mailto URL:', mailtoUrl); // For debugging mailto issues
 
     // Always copy to clipboard first
     var combinedContent = 'Subject: ' + subject + '\n\n' + body;
