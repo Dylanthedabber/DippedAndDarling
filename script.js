@@ -250,7 +250,8 @@ var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+    } else {
+      entry.target.classList.remove('visible');
     }
   });
 }, { threshold: 0.1 });
@@ -383,10 +384,15 @@ var orderItems = [];
 
       deliveryMethod = btn.dataset.method;
 
+      // Jiggle the active button
+      btn.classList.remove('jiggle');
+      void btn.offsetWidth;
+      btn.classList.add('jiggle');
+
       if (deliveryMethod === 'delivery') {
-        addressGroup.classList.remove('hidden');
+        addressGroup.classList.add('open');
       } else {
-        addressGroup.classList.add('hidden');
+        addressGroup.classList.remove('open');
         // Clear address error if switching to pickup
         var addressInput = document.getElementById('address');
         var addressError = document.getElementById('addressError');
@@ -445,6 +451,12 @@ function renderOrderItems() {
     var popClass = dir > 0 ? 'pop' : 'shrink';
     itemEl.classList.add(popClass);
     qtyEl.classList.add('bump');
+    // Jiggle the item when it first activates or deactivates
+    if ((current === 0 && next > 0) || (current > 0 && next === 0)) {
+      itemEl.classList.remove('jiggle');
+      void itemEl.offsetWidth;
+      itemEl.classList.add('jiggle');
+    }
     setTimeout(function() {
       itemEl.classList.remove(popClass);
       qtyEl.classList.remove('bump');
@@ -475,6 +487,10 @@ function updateOrderSummary() {
   }
 
   summaryEl.classList.remove('hidden');
+  // Jiggle the summary on update
+  summaryEl.classList.remove('jiggle');
+  void summaryEl.offsetWidth; // force reflow
+  summaryEl.classList.add('jiggle');
   itemsEl.innerHTML = '';
   var total = 0;
 
@@ -533,9 +549,9 @@ function loadFormData() {
         }
       });
       if (formData.deliveryMethod === 'delivery') {
-        addressGroup.classList.remove('hidden');
+        addressGroup.classList.add('open');
       } else {
-        addressGroup.classList.add('hidden');
+        addressGroup.classList.remove('open');
       }
     }
 
