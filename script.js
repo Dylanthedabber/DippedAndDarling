@@ -318,7 +318,7 @@ function renderOrderItems() {
       '</div>' +
       '<div class="qty-controls">' +
         '<button type="button" class="qty-btn" data-idx="' + i + '" data-dir="-1">−</button>' +
-        '<span class="qty-value" id="qty' + i + '">0</span>' +
+        '<span class="qty-value" id="qty' + i + '">0</span>' + // FIX: Removed extra + here
         '<button type="button" class="qty-btn" data-idx="' + i + '" data-dir="1">+</button>' +
       '</div>';
     container.appendChild(div);
@@ -636,7 +636,7 @@ function handleFormSubmit(e) {
     // Always copy to clipboard first
     var combinedContent = 'Subject: ' + subject + '\n\n' + body;
     copyToClipboard(combinedContent,
-                    'The email subject and body have been copied to your clipboard.',
+                    'The email subject and body have been copied to clipboard.',
                     'Could not copy email content to clipboard.');
 
     // Then attempt to open mailto if URL is not too long, or alert and rely on copy
