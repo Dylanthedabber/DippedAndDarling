@@ -608,6 +608,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .menu-item-name {
   color: rgba(107,62,62,0.8);
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .menu-item-price {
   color: #6B3E3E;
@@ -1085,6 +1088,74 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .toast-desc {
   font-size: 0.875rem;
   color: rgba(107,62,62,0.7);
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* Higher than lightbox */
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-content {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+.modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6B3E3E;
+}
+.modal-content p {
+  color: rgba(107,62,62,0.8);
+  font-size: 1rem;
+}
+.modal-content textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(212,165,165,0.3);
+  resize: vertical;
+  font-family: monospace; /* For code-like content */
+  font-size: 0.875rem;
+  background: #F5F1E8;
+  color: #6B3E3E;
+}
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.modal-actions .submit-btn,
+.modal-actions .cta-btn {
+  width: auto; /* Override 100% width from general .submit-btn */
+  padding: 0.75rem 1.5rem;
 }
 
 /* ===== FOOTER ===== */
