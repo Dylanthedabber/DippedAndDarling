@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dipped & Darling Sweet Treats - Handcrafted Chocolate Delights</title>
+  <meta name="description" content="Handcrafted dipped treats made with love in North Texas. Custom orders for parties, gifts, and special occasions. Texas Food Handler Certified and Cottage Food Law compliant.">
+  <meta name="theme-color" content="#6B3E3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="preload" href="images/hero-background.webp" as="image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="siteHeader">
+    <nav class="container">
+      <div class="nav-inner">
+        <a href="#home" class="logo">
+          <img src="images/logo.jpg" alt="Dipped & Darling Sweet Treats Logo">
+          <div class="logo-text">
+            <span class="logo-name">Dipped &amp; Darling</span>
+            <a href="tel:9405978453" class="logo-phone">
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (940) 597-8453
+            </a>
+          </div>
+        </a>
+
+        <div class="desktop-nav">
+          <a href="#home">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#menu">Menu</a>
+          <a href="#specials">Specials</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="tel:9405978453" class="cta-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Us
+          </a>
+        </div>
+
+        <div class="mobile-controls">
+          <a href="tel:9405978453" aria-label="Call us">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </a>
+          <button onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" id="menuBtn">
+            <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            <svg id="closeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMobileMenu()">Home</a>
+        <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
+        <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+        <a href="#specials" onclick="closeMobileMenu()">Specials</a>
+        <a href="#about" onclick="closeMobileMenu()">About</a>
+        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+        <div class="contact-divider">
+          <p>Contact Us</p>
+          <a href="tel:9405978453">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (940) 597-8453
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="images/hero-background.webp" alt="Dipped and Darling Sweet Treats">
+      <div class="overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="animate-fade-in-up">
+        Handcrafted Dipped Treats
+        <span>Made with Love</span>
+      </h1>
+      <p class="animate-fade-in-up delay-2">
+        Indulge in premium chocolate-dipped delights, perfect for any occasion
+      </p>
+      <a href="#contact" class="order-btn animate-fade-in-up delay-4">Order Now</a>
+    </div>
+    <div class="scroll-indicator">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Handcrafted Treats</h2>
+        <p>Discover our delicious selection of chocolate-dipped delights, made fresh with premium ingredients</p>
+      </div>
+      <div class="gallery-wrapper">
+        <button class="gallery-nav-btn prev hidden" id="galleryPrev" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <button class="gallery-nav-btn next hidden" id="galleryNext" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="gallery-dots hidden" id="galleryDots"></div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Our Menu</h2>
+        <p>Browse our selection of handcrafted treats and pricing</p>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+      <div class="menu-delivery reveal">
+        <div class="menu-delivery-inner">
+          <h3>Delivery & Pickup</h3>
+          <div class="delivery-options">
+            <div class="delivery-option">
+              <span class="delivery-label">Pickup</span>
+              <span class="delivery-price">Free</span>
+            </div>
+            <div class="delivery-divider"></div>
+            <div class="delivery-option">
+              <span class="delivery-label">Within 10 miles</span>
+              <span class="delivery-price">$10 flat</span>
+            </div>
+            <div class="delivery-divider"></div>
+            <div class="delivery-option">
+              <span class="delivery-label">Each additional mile</span>
+              <span class="delivery-price">+$1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPECIALS ===== -->
+  <section class="specials" id="specials">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Specials</h2>
+        <p>Check out our latest specials and limited-time treats</p>
+      </div>
+      <div class="specials-content">
+        <div class="specials-image reveal delay-1">
+          <img src="images/special.webp" loading="lazy" alt="Valentine's Day Menu - Chocolate Covered Strawberries, Cakesicles, Breakable Heart Bento Box, Heart Strawberry Box">
+        </div>
+        <div class="specials-text reveal delay-2">
+          <h3>Valentine's Day Treats</h3>
+          <p>Make this Valentine's Day extra sweet with our handcrafted chocolate covered strawberries, cakesicles, breakable heart bento boxes, and more. Check out our menu for pricing and place your order today!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>About Dipped &amp; Darling</h2>
+        <p>Crafting sweet memories, one treat at a time</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card reveal delay-1">
+          <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Our Story</h3>
+          <p>Born from a passion for creating delicious, handcrafted treats, Dipped &amp; Darling brings joy to every celebration. We believe in using only the finest ingredients to create memorable experiences for our customers.</p>
+        </div>
+        <div class="about-card reveal delay-2">
+          <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3>Certifications &amp; Compliance</h3>
+          <div class="bullet-list">
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Texas Food Handler Certified</p></div>
+            <div class="bullet-item"><div class="bullet-dot"></div><p>TX Cottage Food Law Compliant</p></div>
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Safe Food Handling Practices</p></div>
+          </div>
+        </div>
+        <div class="about-card reveal delay-3">
+          <div class="icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          </div>
+          <h3>Why Choose Us</h3>
+          <div class="bullet-list">
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Premium Quality Ingredients</p></div>
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Custom Orders Welcome</p></div>
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Made Fresh to Order</p></div>
+            <div class="bullet-item"><div class="bullet-dot"></div><p>Local Pickup &amp; Delivery</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Get in Touch</h2>
+        <p>Ready to order? We'd love to create something special for you!</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="info-card">
+            <h3>Contact Us Directly</h3>
+            <a href="tel:9405978453" class="contact-method">
+              <div class="method-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <p class="method-label">Call or Text</p>
+                <p class="method-value">(940) 597-8453</p>
+              </div>
+            </a>
+            <a href="mailto:dippedndarling@gmail.com" class="contact-method">
+              <div class="method-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <p class="method-label">Email Us</p>
+                <p class="method-value">dippedndarling@gmail.com</p>
+              </div>
+            </a>
+            <a href="https://www.facebook.com/messages/t/61581837754431/" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="method-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              </div>
+              <div>
+                <p class="method-label">Messenger</p>
+                <p class="method-value">Message Us</p>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/dippedanddarling" target="_blank" rel="noopener noreferrer" class="contact-method">
+              <div class="method-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              </div>
+              <div>
+                <p class="method-label">Instagram</p>
+                <p class="method-value">@DIPPEDANDDARLING</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="info-card">
+            <div class="location-header">
+              <div class="method-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h3 style="margin-bottom:0.5rem">Location</h3>
+                <p>Serving North Texas</p>
+              </div>
+            </div>
+            <h3 style="margin-bottom:1rem">Our Services</h3>
+            <div class="services-grid">
+              <div class="service-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                <span>Custom Orders</span>
+              </div>
+              <div class="service-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/><path d="M12 12v6"/><path d="M8 16l4-4 4 4"/></svg>
+                <span>Parties &amp; Events</span>
+              </div>
+              <div class="service-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="22" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                <span>Gift Packages</span>
+              </div>
+              <div class="service-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                <span>Local Pickup &amp; Delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card order-info">
+            <h3>Order Information</h3>
+            <p>&#128197; Orders accepted 7 days a week</p>
+            <p>&#9200; Minimum 48-hour notice for custom orders</p>
+            <p>&#128663; Local pickup and delivery available</p>
+            <p>&#128157; Perfect for weddings, parties, and gifts</p>
+          </div>
+        </div>
+
+        <div class="reveal delay-2">
+          <form class="order-form" id="orderForm" onsubmit="handleFormSubmit(event)">
+            <h3>Place Your Order</h3>
+
+            <label class="form-section-label">Select Your Treats</label>
+            <div class="order-items" id="orderItems"></div>
+            <p class="error-text" id="cartError" style="display:none"></p>
+
+            <div class="order-summary hidden" id="orderSummary">
+              <h4>Order Summary</h4>
+              <div id="orderSummaryItems"></div>
+              <div class="order-total">
+                <span>Estimated Total</span>
+                <span id="orderTotal">$0</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" placeholder="Your full name">
+              <p class="error-text" id="nameError" style="display:none"></p>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" placeholder="(940) 555-1234">
+              <p class="error-text" id="phoneError" style="display:none"></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-section-label">Delivery Method *</label>
+              <div class="delivery-toggle" id="deliveryToggle">
+                <button type="button" class="delivery-toggle-btn active" data-method="pickup">Pickup</button>
+                <button type="button" class="delivery-toggle-btn" data-method="delivery">Delivery</button>
+              </div>
+              <p class="error-text" id="deliveryError" style="display:none"></p>
+            </div>
+
+            <div class="form-group hidden" id="addressGroup">
+              <label for="address">Delivery Address *</label>
+              <input type="text" id="address" name="address" placeholder="123 Main St, City, TX 76201">
+              <p class="error-text" id="addressError" style="display:none"></p>
+            </div>
+
+            <div class="form-group">
+              <label for="eventDate">Event Date (Optional)</label>
+              <input type="date" id="eventDate" name="eventDate">
+            </div>
+            <div class="form-group">
+              <label for="customDetails">Additional Details (Optional)</label>
+              <textarea id="customDetails" name="customDetails" rows="3" placeholder="Custom themes, colors, dietary restrictions, or special requests..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Order Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-row">
+            <img src="images/logo.jpg" alt="Dipped & Darling Sweet Treats Logo">
+            <span>Dipped &amp; Darling</span>
+          </div>
+          <p>Handcrafted sweet treats made with love in North Texas</p>
+          <div class="certified">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span>Texas Food Handler Certified</span>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <span>Quick Links</span>
+          <nav>
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#specials">Specials</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+
+        <div class="footer-connect">
+          <span>Connect With Us</span>
+          <div class="connect-links">
+            <a href="tel:9405978453">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (940) 597-8453
+            </a>
+            <a href="mailto:dippedndarling@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              dippedndarling@gmail.com
+            </a>
+            <p>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              Serving North Texas
+            </p>
+          </div>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/profile.php?id=61581837754431" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/dippedanddarling" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.facebook.com/messages/t/61581837754431/" target="_blank" rel="noopener noreferrer" aria-label="Facebook Messenger">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Dipped &amp; Darling Sweet Treats. All rights reserved.</p>
+        <p>Made with <svg style="display:inline-block;vertical-align:middle" class="heart" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> in Texas</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="">
+      <div class="lightbox-caption">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDesc"></p>
+      </div>
+    </div>
+    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast">
+    <p class="toast-title" id="toastTitle"></p>
+    <p class="toast-desc" id="toastDesc"></p>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalMessage"></p>
+      <textarea id="modalEmailContent" readonly rows="10"></textarea>
+      <div class="modal-actions">
+        <button id="modalCopyBtn" class="submit-btn">Copy Email Content</button>
+        <button id="modalCloseBtn" class="cta-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- data files load first, then the main script -->
+  <script src="gallery.js" defer></script>
+  <script src="menu.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
