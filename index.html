@@ -310,12 +310,12 @@
 
             <div class="form-group">
               <label for="name">Name *</label>
-              <input type="text" id="name" name="name" placeholder="Your full name">
+              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name">
               <p class="error-text" id="nameError" style="display:none"></p>
             </div>
             <div class="form-group">
               <label for="phone">Phone *</label>
-              <input type="tel" id="phone" name="phone" placeholder="(940) 555-1234">
+              <input type="tel" id="phone" name="phone" placeholder="(940) 555-1234" autocomplete="tel">
               <p class="error-text" id="phoneError" style="display:none"></p>
             </div>
 
@@ -330,17 +330,17 @@
 
             <div class="form-group" id="addressGroup">
               <label for="address">Delivery Address *</label>
-              <input type="text" id="address" name="address" placeholder="123 Main St, City, TX 76201">
+              <input type="text" id="address" name="address" placeholder="123 Main St, City, TX 76201" autocomplete="street-address">
               <p class="error-text" id="addressError" style="display:none"></p>
             </div>
 
             <div class="form-group">
               <label for="eventDate">Event Date (Optional)</label>
-              <input type="date" id="eventDate" name="eventDate">
+              <input type="date" id="eventDate" name="eventDate" autocomplete="off">
             </div>
             <div class="form-group">
               <label for="customDetails">Additional Details (Optional)</label>
-              <textarea id="customDetails" name="customDetails" rows="3" placeholder="Custom themes, colors, dietary restrictions, or special requests..."></textarea>
+              <textarea id="customDetails" name="customDetails" rows="3" placeholder="Custom themes, colors, dietary restrictions, or special requests..." autocomplete="off"></textarea>
             </div>
             <button type="submit" class="submit-btn">Submit Order Request</button>
           </form>

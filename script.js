@@ -18,6 +18,39 @@ function spawnBurst(x, y, count) {
   }
 }
 
+// Global variables for mouse velocity tracking
+var prevMouse = null; // {x, y, time, vx, vy, speed}
+var lastTrailSpawn = 0;
+var TRAIL_COOLDOWN = 150; // ms between directional bursts
+var DECEL_THRESHOLD = 0.3; // speed drop ratio (prev vs current) to trigger
+var MIN_SPEED = 0.5; // minimum prev speed (px/ms) to care about
+var PARTICLE_SPREAD = 40; // degrees of cone spread
+
+// Function to spawn particles based on mouse direction
+function spawnDirectionalParticles(x, y, baseDx, baseDy, count) {
+  var dist = 50 + Math.random() * 40;
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('span');
+    el.className = 'particle-burst';
+    el.textContent = burstEmojis[Math.floor(Math.random() * burstEmojis.length)];
+
+    var spreadAngle = (Math.random() - 0.5) * (PARTICLE_SPREAD * Math.PI / 180);
+    var baseAngle = Math.atan2(baseDy, baseDx);
+    var angle = baseAngle + spreadAngle;
+    var d = dist + Math.random() * 30;
+
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.setProperty('--dx', (Math.cos(angle) * d) + 'px');
+    el.style.setProperty('--dy', (Math.sin(angle) * d) + 'px');
+    el.style.setProperty('--rot', (Math.random() * 360 - 180) + 'deg');
+    el.style.fontSize = (0.7 + Math.random() * 0.8) + 'rem';
+    document.body.appendChild(el);
+    el.addEventListener('animationend', function() { this.remove(); });
+  }
+}
+
+
 // Global click particles — small burst on any click, bigger on buttons
 document.addEventListener('click', function(e) {
   var isQty = e.target.closest('.qty-btn');
@@ -26,6 +59,33 @@ document.addEventListener('click', function(e) {
   var count = isButton ? 5 : 2;
   spawnBurst(e.clientX, e.clientY, count);
 });
+
+document.addEventListener('mousemove', function(e) {
+  var now = Date.now();
+  var x = e.clientX;
+  var y = e.clientY;
+
+  if (prevMouse) {
+    var dt = now - prevMouse.time;
+    if (dt > 0) {
+      var dx = x - prevMouse.x;
+      var dy = y - prevMouse.y;
+      var speed = Math.sqrt(dx * dx + dy * dy) / dt; // px/ms
+
+      // Deceleration detection: previous speed was high, current speed dropped sharply
+      if (prevMouse.speed >= MIN_SPEED && speed < prevMouse.speed * DECEL_THRESHOLD && (now - lastTrailSpawn > TRAIL_COOLDOWN)) {
+        // Shoot particles in the direction mouse WAS traveling (previous velocity)
+        spawnDirectionalParticles(x, y, prevMouse.vx, prevMouse.vy, 1);
+        lastTrailSpawn = now;
+      }
+
+      prevMouse = { x: x, y: y, time: now, vx: dx / dt, vy: dy / dt, speed: speed };
+    }
+  } else {
+    prevMouse = { x: x, y: y, time: now, vx: 0, vy: 0, speed: 0 };
+  }
+});
+
 
 // === Gallery carousel ===
 var ITEMS_PER_PAGE = 6;
@@ -470,7 +530,6 @@ function renderOrderItems() {
     if (Object.keys(cart).length > 0) {
       cartErr.style.display = 'none';
       cartErr.textContent = '';
-      orderItemsContainer.classList.remove('error'); // Clear error class
     }
   });
 }
@@ -540,7 +599,7 @@ function loadFormData() {
     // Restore delivery method
     var deliveryToggle = document.getElementById('deliveryToggle');
     var addressGroup = document.getElementById('addressGroup');
-    if (deliveryToggle) {
+  if (deliveryToggle) {
       deliveryToggle.querySelectorAll('.delivery-toggle-btn').forEach(function(btn) {
         if (btn.dataset.method === formData.deliveryMethod) {
           btn.classList.add('active');
@@ -552,28 +611,16 @@ function loadFormData() {
         addressGroup.classList.add('open');
       } else {
         addressGroup.classList.remove('open');
+        // Clear address error if switching to pickup
+        var addressInput = document.getElementById('address');
+        var addressError = document.getElementById('addressError');
+        if (addressInput) addressInput.classList.remove('error');
+        if (addressError) {
+          addressError.style.display = 'none';
+          addressError.textContent = '';
+        }
       }
-    }
-
-    // Restore cart
-    if (formData.cart) {
-      cart = formData.cart;
-      // Update quantity display and active class for each item
-      // This needs to happen *after* renderOrderItems has created the elements
-      // So we'll call a dedicated function or ensure renderOrderItems is called early enough
-      // For now, assume renderOrderItems has already run on initial load
-      Object.keys(cart).forEach(function(idx) {
-        // Check if the element exists before trying to update it
-        var qtyEl = document.getElementById('qty' + idx);
-        var itemEl = document.getElementById('orderItem' + idx);
-        if (qtyEl) {
-          qtyEl.textContent = cart[idx];
-        }
-        if (itemEl) {
-          itemEl.classList.toggle('active', cart[idx] > 0);
-        }
-      });
-      updateOrderSummary(); // Update the order summary section
+      saveFormData(); // Save data when delivery method changes
     }
   }
 }
@@ -694,7 +741,7 @@ document.getElementById('modalCopyBtn').addEventListener('click', function() {
   var emailContent = document.getElementById('modalEmailContent').value;
   copyToClipboard(emailContent,
                   'Email content copied to clipboard!',
-                  'Failed to copy email content.');
+                  'Could not copy email content to clipboard.');
 });
 
 function handleFormSubmit(e) {
@@ -781,4 +828,4 @@ function handleFormSubmit(e) {
   } else {
     showToast('Please check your form', 'Some required fields are missing or invalid.', true);
   }
-} // Added missing closing brace
+}
