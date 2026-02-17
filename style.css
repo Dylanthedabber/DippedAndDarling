@@ -100,12 +100,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 50;
-  background: #6B3E3E;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  background: #D4A5A5;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
 }
 .header.scrolled {
-  background: rgba(107, 62, 62, 0.95);
+  background: rgba(212, 165, 165, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -125,7 +125,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-  border: 2px solid rgba(245, 241, 232, 0.2);
+  border: 2px solid rgba(107, 62, 62, 0.15);
   transition: transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .header .logo img:hover {
@@ -134,14 +134,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .header .logo-text { display: flex; flex-direction: column; }
 .header .logo-name {
   font-size: 1.25rem; font-weight: 700;
-  color: #F5F1E8; line-height: 1;
+  color: #6B3E3E; line-height: 1;
 }
 .header .logo-phone {
-  font-size: 0.75rem; color: rgba(245,241,232,0.8);
+  font-size: 0.75rem; color: rgba(107,62,62,0.6);
   display: flex; align-items: center; gap: 4px; margin-top: 4px;
   transition: color 0.2s;
 }
-.header .logo-phone:hover { color: #D4A5A5; }
+.header .logo-phone:hover { color: #6B3E3E; }
 
 /* Desktop Nav */
 .desktop-nav {
@@ -150,24 +150,24 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   gap: 2rem;
 }
 .desktop-nav a {
-  color: #F5F1E8;
+  color: #6B3E3E;
   font-weight: 500;
   transition: color 0.2s, transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
   position: relative;
 }
-.desktop-nav a:not(.cta-btn):hover { color: #D4A5A5; transform: scale(1.1) translateY(-2px); }
+.desktop-nav a:not(.cta-btn):hover { color: #4A2A2A; transform: scale(1.1) translateY(-2px); }
 .desktop-nav a:not(.cta-btn)::after {
   content: '';
   position: absolute;
   bottom: -2px; left: 0;
   width: 0; height: 2px;
-  background: #D4A5A5;
+  background: #6B3E3E;
   transition: width 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .desktop-nav a:not(.cta-btn):hover::after { width: 100%; }
 .cta-btn {
-  background: #D4A5A5;
-  color: #6B3E3E !important;
+  background: #6B3E3E;
+  color: #F5F1E8 !important;
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
@@ -176,7 +176,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
   display: flex; align-items: center; gap: 0.5rem;
 }
-.cta-btn:hover { background: rgba(212,165,165,0.9); transform: scale(1.12) rotate(-2deg); }
+.cta-btn:hover { background: #4A2A2A; transform: scale(1.12) rotate(-2deg); }
 .cta-btn:active { transform: scale(0.88) rotate(1deg); }
 
 /* Mobile menu */
