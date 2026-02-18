@@ -92,11 +92,26 @@ var galleryPage = 0;
 var galleryAnimating = false;
 var galleryShowAll = false;
 
+// Image cache — preload all gallery images so transitions never flicker
+var imageCache = {};
+function preloadImage(src) {
+  if (!imageCache[src]) {
+    var img = new Image();
+    img.src = src;
+    imageCache[src] = img;
+  }
+  return imageCache[src];
+}
+// Preload all gallery images immediately
+galleryImages.forEach(function(item) {
+  preloadImage(item.src);
+});
+
 function getItemsPerPage() {
   var w = window.innerWidth;
-  if (w >= 1024) return 6;  // 3 cols x 2 rows
-  if (w >= 640) return 4;   // 2 cols x 2 rows
-  return 2;                 // 1 col x 2 rows
+  if (w >= 1024) return 6;
+  if (w >= 640) return 4;
+  return 2;
 }
 
 function totalGalleryPages() {
@@ -120,12 +135,10 @@ function renderGalleryPage(page, direction) {
   var pages = totalGalleryPages();
   var hasNav = pages > 1 && !galleryShowAll;
 
-  // Show/hide nav
   prevBtn.classList.toggle('hidden', !hasNav);
   nextBtn.classList.toggle('hidden', !hasNav);
   dotsContainer.classList.toggle('hidden', !hasNav);
 
-  // Build dots
   if (hasNav) {
     dotsContainer.innerHTML = '';
     for (var d = 0; d < pages; d++) {
@@ -145,36 +158,37 @@ function renderGalleryPage(page, direction) {
     }
   }
 
-  // Animate out existing cards with slide direction
   var existingCards = grid.querySelectorAll('.treat-card');
   if (existingCards.length > 0 && direction) {
     galleryAnimating = true;
-    // Lock grid height to prevent collapse flash
     grid.style.minHeight = grid.offsetHeight + 'px';
     var exitClass = direction === 'next' ? 'card-exit-left' : 'card-exit-right';
     existingCards.forEach(function(card) {
       card.classList.add(exitClass);
     });
+    // Wait for exit animation, then ensure images are loaded before showing new cards
     setTimeout(function() {
-      buildCards(grid, page, direction);
-      // Release height lock after enter animation finishes
-      setTimeout(function() {
-        grid.style.minHeight = '';
-        galleryAnimating = false;
-      }, 500);
+      var newCards = createCards(page, direction);
+      waitForImages(newCards, function() {
+        grid.innerHTML = '';
+        newCards.forEach(function(card) { grid.appendChild(card); });
+        observeCards(newCards);
+        setTimeout(function() {
+          grid.style.minHeight = '';
+          galleryAnimating = false;
+        }, 500);
+      });
     }, 350);
   } else {
-    buildCards(grid, page, direction);
+    buildAndAppendCards(grid, page, direction);
   }
 }
 
 var galleryFirstRender = true;
 
-function buildCards(grid, page, direction) {
-  grid.innerHTML = '';
+function createCards(page, direction) {
   var perPage = getItemsPerPage();
   var start, end;
-
   if (galleryShowAll) {
     start = 0;
     end = galleryImages.length;
@@ -182,8 +196,8 @@ function buildCards(grid, page, direction) {
     start = page * perPage;
     end = Math.min(start + perPage, galleryImages.length);
   }
-
   var cols = getItemsPerPage();
+  var cards = [];
 
   for (var i = start; i < end; i++) {
     var item = galleryImages[i];
@@ -191,33 +205,88 @@ function buildCards(grid, page, direction) {
     var col = (i - start) % cols;
 
     if (galleryShowAll) {
-      // In "show all" mode, alternate slide direction by column
       var slideDir = col % 2 === 0 ? 'slide-left' : 'slide-right';
       card.className = 'treat-card ' + slideDir;
       card.style.transitionDelay = ((i - start) % cols * 0.08) + 's';
     } else if (galleryFirstRender) {
       card.className = 'treat-card';
     } else {
-      // Page navigation: slide in from direction
       var enterClass = direction === 'next' ? 'card-enter-right' : 'card-enter-left';
       card.className = 'treat-card ' + enterClass;
       card.style.animationDelay = (col * 0.06) + 's';
     }
 
-    card.innerHTML =
-      '<div class="img-wrapper"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy"></div>' +
-      '<div class="card-overlay"><h3>' + item.title + '</h3><p>' + item.desc + '</p></div>';
+    // Use cached image if available
+    var cachedImg = imageCache[item.src];
+    var imgEl = document.createElement('img');
+    imgEl.alt = item.title;
+    if (cachedImg && cachedImg.complete) {
+      imgEl.src = cachedImg.src;
+    } else {
+      imgEl.src = item.src;
+    }
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'img-wrapper';
+    wrapper.appendChild(imgEl);
+
+    var overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+    overlay.innerHTML = '<h3>' + item.title + '</h3><p>' + item.desc + '</p>';
+
+    card.appendChild(wrapper);
+    card.appendChild(overlay);
     card.dataset.index = i;
     card.addEventListener('click', function() {
       openLightbox(parseInt(this.dataset.index));
     });
-    grid.appendChild(card);
+    cards.push(card);
+  }
+  return cards;
+}
 
-    // Observe for scroll-triggered slide-in
+function waitForImages(cards, callback) {
+  var images = [];
+  cards.forEach(function(card) {
+    var img = card.querySelector('img');
+    if (img && !img.complete) images.push(img);
+  });
+  if (images.length === 0) {
+    callback();
+    return;
+  }
+  var loaded = 0;
+  var done = false;
+  function check() {
+    loaded++;
+    if (!done && loaded >= images.length) {
+      done = true;
+      callback();
+    }
+  }
+  // Fallback timeout so we never hang
+  setTimeout(function() {
+    if (!done) { done = true; callback(); }
+  }, 800);
+  images.forEach(function(img) {
+    img.addEventListener('load', check);
+    img.addEventListener('error', check);
+  });
+}
+
+function observeCards(cards) {
+  cards.forEach(function(card) {
     if (card.classList.contains('slide-left') || card.classList.contains('slide-right')) {
       cardObserver.observe(card);
     }
-  }
+  });
+}
+
+function buildAndAppendCards(grid, page, direction) {
+  var cards = createCards(page, direction);
+  grid.innerHTML = '';
+  cards.forEach(function(card) { grid.appendChild(card); });
+  observeCards(cards);
   galleryFirstRender = false;
 }
 
@@ -256,8 +325,9 @@ window.addEventListener('resize', function() {
   }, 200);
 });
 
-// Initial render — fade in after cards are built
+// Initial render
 renderGalleryPage(0, null);
+galleryFirstRender = false;
 var galleryGrid = document.getElementById('galleryGrid');
 requestAnimationFrame(function() {
   galleryGrid.classList.add('loaded');
