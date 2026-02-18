@@ -156,7 +156,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: color 0.2s, transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
   position: relative;
 }
-.desktop-nav a:not(.cta-btn):hover { color: #D4A5A5; transform: scale(1.1) translateY(-2px); } /* Adjusted: hover color */
+.desktop-nav a:not(.cta-btn):hover { color: #D4A5A5; } /* Adjusted: hover color */
 .desktop-nav a:not(.cta-btn)::after {
   content: '';
   position: absolute;
@@ -227,7 +227,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .mobile-menu a:hover {
   color: #D4A5A5;
   background: rgba(252,238,240,0.1); /* Adjusted: background color */
-  transform: translateX(8px) scale(1.03);
 }
 .mobile-menu .contact-divider {
   border-top: 1px solid rgba(252,238,240,0.2); /* Adjusted: border color */
@@ -383,7 +382,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 1rem;
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
-.section-header h2:hover { transform: scale(1.05); }
+.section-header h2:hover { color: #5a3232; }
 .section-header p {
   font-size: 1.125rem;
   color: rgba(107,62,62,0.8);
@@ -513,7 +512,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 0;
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
-.gallery-dot:hover { background: rgba(212,165,165,0.7); transform: scale(1.4); }
+.gallery-dot:hover { background: rgba(212,165,165,0.7); transform: scale(1.2); }
 .gallery-dot.active {
   background: #6B3E3E;
   transform: scale(1.5);
@@ -652,7 +651,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .menu-card:hover {
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2);
-  transform: translateY(-8px) scale(1.04) rotate(-0.5deg);
+  transform: translateY(-4px);
 }
 .menu-card h3 {
   font-size: 1.25rem;
@@ -677,7 +676,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .menu-item:hover {
   background: rgba(212,165,165,0.08);
-  transform: translateX(0px);
 }
 .menu-item + .menu-item {
   border-top: 1px solid rgba(212,165,165,0.15);
@@ -697,7 +695,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   text-align: center; /* Center price text */
   transition: all 0.3s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
-.menu-item:hover .menu-item-price { transform: scale(1.08); color: #C48B8B; }
+.menu-item:hover .menu-item-price { color: #C48B8B; }
 .menu-qty-controls {
   display: flex;
   align-items: center;
@@ -781,11 +779,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  min-width: 140px;
+  min-width: 0;
   transition: transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .delivery-option:hover {
-  transform: scale(1.08) translateY(-4px);
+  transform: translateY(-2px);
 }
 .delivery-label {
   color: rgba(107,62,62,0.8);
@@ -872,7 +870,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: center;
 }
-.about-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2); transform: translateY(-8px) scale(1.04) rotate(0.5deg); }
+.about-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.2); transform: translateY(-4px); }
 .about-card .icon-circle {
   display: inline-flex;
   background: rgba(212,165,165,0.2);
@@ -882,7 +880,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .about-card:hover .icon-circle {
-  transform: scale(1.2) rotate(-8deg);
   background: rgba(212,165,165,0.35);
 }
 .about-card .icon-circle svg {
@@ -918,7 +915,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .about-card:hover .bullet-dot {
-  transform: scale(1.6);
+  transform: scale(1.2);
 }
 .about-card .bullet-item p {
   margin: 0;
@@ -952,7 +949,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .info-card:hover {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-3px);
   box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
 }
 .info-card h3 {
@@ -962,7 +959,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
 }
-.info-card:hover h3 { letter-spacing: 0.02em; }
+.info-card:hover h3 { color: #5a3232; }
 .contact-method {
   display: flex;
   align-items: center;
@@ -976,10 +973,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .contact-method:hover {
   background: rgba(212,165,165,0.1);
   border-color: rgba(212,165,165,0.3);
-  transform: translateX(6px) scale(1.03);
   box-shadow: 0 4px 12px rgba(107,62,62,0.08);
 }
-.contact-method:active { transform: translateX(3px) scale(0.97); }
+.contact-method:active { opacity: 0.8; }
 .contact-method + .contact-method { margin-top: 0.5rem; }
 .contact-method .method-icon {
   background: rgba(212,165,165,0.2);
@@ -991,7 +987,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .contact-method:hover .method-icon {
   background: #D4A5A5;
-  transform: scale(1.15) rotate(-8deg);
 }
 .contact-method:hover .method-icon svg {
   color: #fff;
@@ -1031,7 +1026,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .location-header:hover {
   background: rgba(212,165,165,0.08);
-  transform: scale(1.02);
 }
 .location-header .method-icon {
   background: rgba(212,165,165,0.2);
@@ -1043,7 +1037,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .location-header:hover .method-icon {
   background: #D4A5A5;
-  transform: scale(1.15) rotate(-8deg);
 }
 .location-header .method-icon svg {
   width: 28px; height: 28px;
@@ -1078,9 +1071,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   border: 2px solid transparent;
 }
 .service-item:hover {
-  transform: scale(1.06) translateX(4px);
-  background: rgba(212,165,165,0.1); /* Matched contact-method hover background */
-  border-color: rgba(212,165,165,0.3); /* Matched contact-method hover border */
+  background: rgba(212,165,165,0.1);
+  border-color: rgba(212,165,165,0.3);
   box-shadow: 0 4px 12px rgba(107,62,62,0.08);
 }
 .service-item svg {
@@ -1090,8 +1082,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .service-item:hover svg {
-  transform: scale(1.2) rotate(-8deg);
-  color: #6B3E3E; /* Updated: svg color to dark brown for readability */
+  color: #6B3E3E;
 }
 .service-item span {
   font-size: 0.875rem;
@@ -1111,7 +1102,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .order-info p:hover {
   background: rgba(212,165,165,0.1);
-  transform: translateX(6px) scale(1.03);
   color: #6B3E3E;
 }
 
@@ -1122,6 +1112,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   padding: 2rem;
   box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
   transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
+  min-width: 0;
+  overflow: visible;
 }
 .order-form:hover {
   box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15);
@@ -1133,7 +1125,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   margin-bottom: 1.5rem;
   transition: all 0.4s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
-.order-form h3:hover { transform: scale(1.04); }
+.order-form h3:hover { color: #5a3232; }
 .form-group { margin-bottom: 1rem; }
 .form-group label {
   display: block;
@@ -1143,7 +1135,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.3s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .form-group label:hover {
-  transform: translateX(4px) scale(1.03);
   color: #C48B8B;
 }
 .form-group input,
@@ -1156,6 +1147,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   color: #1a1b1e;
   font-size: 1rem;
   background: white;
+  max-width: 100%;
 }
 .form-group input:focus,
 .form-group textarea:focus {
@@ -1221,7 +1213,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.3s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .form-section-label:hover {
-  transform: translateX(4px) scale(1.03);
   color: #C48B8B;
 }
 .order-items {
@@ -1253,11 +1244,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: 0.5rem;
   background: #FCEEF0;
   transition: border-color 0.3s ease, background 0.3s ease, transform 0.4s cubic-bezier(0.22, 1.8, 0.36, 1), box-shadow 0.3s ease;
+  min-width: 0;
 }
 .order-item:hover {
-  transform: translateX(4px) scale(1.02);
-  border-color: rgba(212,165,165,0.3); /* Matched contact-method hover border */
-  background: rgba(212,165,165,0.1); /* Matched contact-method hover background */
+  border-color: rgba(212,165,165,0.4);
+  background: rgba(212,165,165,0.1);
   box-shadow: 0 3px 10px rgba(107,62,62,0.08);
 }
 .order-item.active {
@@ -1267,7 +1258,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 0 2px 8px rgba(107,62,62,0.15);
 }
 .order-item.active:hover {
-  transform: translateX(4px) scale(1.03);
   box-shadow: 0 4px 12px rgba(107,62,62,0.2);
 }
 .order-item.active .order-item-name,
@@ -1297,9 +1287,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   font-weight: 500;
   font-size: 0.85rem;
   color: #6B3E3E;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-word;
   transition: color 0.3s ease;
 }
 .order-item:hover .order-item-name {
@@ -1412,7 +1400,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.3s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .order-summary h4:hover {
-  transform: scale(1.04);
+  color: #5a3232;
 }
 .summary-item {
   display: flex;
@@ -1426,7 +1414,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .summary-item:hover {
   background: rgba(212,165,165,0.1);
-  transform: translateX(4px) scale(1.02);
   color: #6B3E3E;
 }
 .summary-item + .summary-item {
@@ -1449,7 +1436,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   transition: all 0.3s cubic-bezier(0.22, 1.8, 0.36, 1);
 }
 .order-total:hover {
-  transform: scale(1.03);
+  color: #5a3232;
 }
 
 .submit-btn {
@@ -1673,7 +1660,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .footer-links a:hover {
   color: #D4A5A5;
-  transform: translateX(6px) scale(1.05);
 }
 
 .footer-connect span {
@@ -1699,7 +1685,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .footer-connect .connect-links a:hover {
   color: #D4A5A5;
-  transform: translateX(6px) scale(1.03);
 }
 .footer-connect .connect-links svg {
   width: 16px;
@@ -1741,4 +1726,54 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .footer-bottom .heart {
   color: #D4A5A5;
+}
+
+/* ===== RESPONSIVE FIXES ===== */
+
+/* Small phones (≤ 480px) */
+@media (max-width: 480px) {
+  .container { padding: 0 0.75rem; }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .hero .order-btn { padding: 0.75rem 1.5rem; font-size: 1rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .order-items { grid-template-columns: 1fr; }
+  .order-form { padding: 1.25rem; }
+  .order-item { padding: 0.5rem 0.6rem; }
+  .delivery-options { flex-direction: column; gap: 1rem; }
+  .delivery-divider { display: none; }
+  .menu-delivery-inner { padding: 1.5rem 1rem; }
+  .modal-content { padding: 1.25rem; width: 95%; }
+  .lightbox-content { max-width: 95vw; }
+  .qty-controls { gap: 0.25rem; margin-left: 0.35rem; }
+  .qty-btn { width: 26px; height: 26px; font-size: 0.9rem; }
+  .delivery-toggle-btn { padding: 0.6rem 0.5rem; font-size: 0.9rem; }
+  .contact-method { padding: 0.5rem; margin: 0 -0.5rem; }
+  .method-value { font-size: 0.85rem; }
+}
+
+/* Tablets and small desktops */
+@media (max-width: 768px) {
+  .specials-content { gap: 2rem; }
+  .contact-grid { gap: 2rem; }
+  .about-grid { gap: 1.5rem; }
+  .services-grid { gap: 0.75rem; }
+  .footer-grid { text-align: center; }
+  .footer-brand .brand-row { justify-content: center; }
+  .footer-links nav { align-items: center; }
+  .footer-connect .connect-links { align-items: center; }
+  .footer-social { justify-content: center; }
+}
+
+/* Disable hover transforms on touch devices */
+@media (hover: none) {
+  .treat-card:hover { transform: none; }
+  .specials-image:hover { transform: none; }
+  .menu-card:hover { transform: none; }
+  .about-card:hover { transform: none; }
+  .info-card:hover { transform: none; }
+  .gallery-dot:hover { transform: none; }
+  .cta-btn:hover { transform: none; }
+  .submit-btn:hover { transform: none; }
+  .hero .order-btn:hover { transform: none; }
 }
