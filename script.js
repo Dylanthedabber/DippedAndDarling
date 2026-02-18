@@ -107,7 +107,7 @@ galleryImages.forEach(function(item) {
   preloadImage(item.src);
 });
 
-var CARD_MIN_WIDTH = 180;
+var CARD_MIN_WIDTH = 280;
 var GRID_GAP = 24; // 1.5rem
 
 function getColumns() {
