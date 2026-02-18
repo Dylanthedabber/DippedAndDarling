@@ -553,9 +553,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   animation: slideOutRight 0.35s ease-in forwards;
 }
 .treat-card.card-enter-left {
+  opacity: 0;
   animation: slideInLeft 0.45s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
 }
 .treat-card.card-enter-right {
+  opacity: 0;
   animation: slideInRight 0.45s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
 }
 @keyframes slideOutLeft {

@@ -157,11 +157,11 @@ function renderGalleryPage(page, direction) {
     });
     setTimeout(function() {
       buildCards(grid, page, direction);
-      // Release height lock after new cards are in
-      requestAnimationFrame(function() {
+      // Release height lock after enter animation finishes
+      setTimeout(function() {
         grid.style.minHeight = '';
-      });
-      galleryAnimating = false;
+        galleryAnimating = false;
+      }, 500);
     }, 350);
   } else {
     buildCards(grid, page, direction);
