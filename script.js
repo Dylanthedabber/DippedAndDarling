@@ -149,12 +149,18 @@ function renderGalleryPage(page, direction) {
   var existingCards = grid.querySelectorAll('.treat-card');
   if (existingCards.length > 0 && direction) {
     galleryAnimating = true;
+    // Lock grid height to prevent collapse flash
+    grid.style.minHeight = grid.offsetHeight + 'px';
     var exitClass = direction === 'next' ? 'card-exit-left' : 'card-exit-right';
     existingCards.forEach(function(card) {
       card.classList.add(exitClass);
     });
     setTimeout(function() {
       buildCards(grid, page, direction);
+      // Release height lock after new cards are in
+      requestAnimationFrame(function() {
+        grid.style.minHeight = '';
+      });
       galleryAnimating = false;
     }, 350);
   } else {
