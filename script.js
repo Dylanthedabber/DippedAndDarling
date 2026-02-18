@@ -88,16 +88,23 @@ document.addEventListener('mousemove', function(e) {
 
 
 // === Gallery carousel ===
-var ITEMS_PER_PAGE = 6;
 var galleryPage = 0;
 var galleryAnimating = false;
 var galleryShowAll = false;
 
-function totalGalleryPages() {
-  return Math.ceil(galleryImages.length / ITEMS_PER_PAGE);
+function getItemsPerPage() {
+  var w = window.innerWidth;
+  if (w >= 1280) return 6;
+  if (w >= 900) return 4;
+  if (w >= 500) return 2;
+  return 1;
 }
 
-// IntersectionObserver for scroll-triggered card animations
+function totalGalleryPages() {
+  return Math.ceil(galleryImages.length / getItemsPerPage());
+}
+
+// IntersectionObserver for scroll-triggered slide-in animations
 var cardObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
@@ -139,48 +146,57 @@ function renderGalleryPage(page, direction) {
     }
   }
 
-  // Animate out existing cards
+  // Animate out existing cards with slide direction
   var existingCards = grid.querySelectorAll('.treat-card');
   if (existingCards.length > 0 && direction) {
     galleryAnimating = true;
+    var exitClass = direction === 'next' ? 'card-exit-left' : 'card-exit-right';
     existingCards.forEach(function(card) {
-      card.classList.add('card-exit');
+      card.classList.add(exitClass);
     });
     setTimeout(function() {
-      buildCards(grid, page);
+      buildCards(grid, page, direction);
       galleryAnimating = false;
-    }, 300);
+    }, 350);
   } else {
-    buildCards(grid, page);
+    buildCards(grid, page, direction);
   }
 }
 
 var galleryFirstRender = true;
 
-function buildCards(grid, page) {
+function buildCards(grid, page, direction) {
   grid.innerHTML = '';
+  var perPage = getItemsPerPage();
   var start, end;
 
   if (galleryShowAll) {
     start = 0;
     end = galleryImages.length;
   } else {
-    start = page * ITEMS_PER_PAGE;
-    end = Math.min(start + ITEMS_PER_PAGE, galleryImages.length);
+    start = page * perPage;
+    end = Math.min(start + perPage, galleryImages.length);
   }
+
+  var cols = getItemsPerPage();
 
   for (var i = start; i < end; i++) {
     var item = galleryImages[i];
     var card = document.createElement('div');
+    var col = (i - start) % cols;
 
     if (galleryShowAll) {
-      // In "show all" mode, use scroll-triggered animations
-      card.className = 'treat-card scroll-reveal';
-      card.style.transitionDelay = ((i % 3) * 0.1) + 's';
+      // In "show all" mode, alternate slide direction by column
+      var slideDir = col % 2 === 0 ? 'slide-left' : 'slide-right';
+      card.className = 'treat-card ' + slideDir;
+      card.style.transitionDelay = ((i - start) % cols * 0.08) + 's';
     } else if (galleryFirstRender) {
       card.className = 'treat-card';
     } else {
-      card.className = 'treat-card scroll-reveal';
+      // Page navigation: slide in from direction
+      var enterClass = direction === 'next' ? 'card-enter-right' : 'card-enter-left';
+      card.className = 'treat-card ' + enterClass;
+      card.style.animationDelay = (col * 0.06) + 's';
     }
 
     card.innerHTML =
@@ -192,8 +208,8 @@ function buildCards(grid, page) {
     });
     grid.appendChild(card);
 
-    // Observe for scroll animation
-    if (card.classList.contains('scroll-reveal')) {
+    // Observe for scroll-triggered slide-in
+    if (card.classList.contains('slide-left') || card.classList.contains('slide-right')) {
       cardObserver.observe(card);
     }
   }
@@ -218,16 +234,26 @@ document.getElementById('galleryToggle').addEventListener('click', function() {
   this.textContent = galleryShowAll ? 'Show Less' : 'See All';
   galleryPage = 0;
   renderGalleryPage(0, null);
-  // Scroll to gallery top if showing less
   if (!galleryShowAll) {
     document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
   }
 });
 
+// Re-render on resize so items-per-page stays in sync
+var resizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    if (!galleryShowAll) {
+      galleryPage = 0;
+      renderGalleryPage(0, null);
+    }
+  }, 200);
+});
+
 // Initial render — fade in after cards are built
 renderGalleryPage(0, null);
 var galleryGrid = document.getElementById('galleryGrid');
-// Wait for images to start loading, then fade in
 requestAnimationFrame(function() {
   galleryGrid.classList.add('loaded');
 });
