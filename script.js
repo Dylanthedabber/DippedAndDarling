@@ -164,6 +164,11 @@ function renderGalleryPage(page, direction) {
     grid.style.minHeight = grid.offsetHeight + 'px';
     var exitClass = direction === 'next' ? 'card-exit-left' : 'card-exit-right';
     existingCards.forEach(function(card) {
+      // Clear any previous animation classes so new exit animation plays cleanly
+      card.classList.remove('card-enter-left', 'card-enter-right', 'card-exit-left', 'card-exit-right');
+      card.style.animation = 'none';
+      card.offsetHeight; // force reflow
+      card.style.animation = '';
       card.classList.add(exitClass);
     });
     // Wait for exit animation, then ensure images are loaded before showing new cards
