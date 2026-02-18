@@ -91,10 +91,20 @@ document.addEventListener('mousemove', function(e) {
 var ITEMS_PER_PAGE = 6;
 var galleryPage = 0;
 var galleryAnimating = false;
+var galleryShowAll = false;
 
 function totalGalleryPages() {
   return Math.ceil(galleryImages.length / ITEMS_PER_PAGE);
 }
+
+// IntersectionObserver for scroll-triggered card animations
+var cardObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
 
 function renderGalleryPage(page, direction) {
   var grid = document.getElementById('galleryGrid');
@@ -102,7 +112,7 @@ function renderGalleryPage(page, direction) {
   var nextBtn = document.getElementById('galleryNext');
   var dotsContainer = document.getElementById('galleryDots');
   var pages = totalGalleryPages();
-  var hasNav = pages > 1;
+  var hasNav = pages > 1 && !galleryShowAll;
 
   // Show/hide nav
   prevBtn.classList.toggle('hidden', !hasNav);
@@ -149,19 +159,30 @@ var galleryFirstRender = true;
 
 function buildCards(grid, page) {
   grid.innerHTML = '';
-  var start = page * ITEMS_PER_PAGE;
-  var end = Math.min(start + ITEMS_PER_PAGE, galleryImages.length);
+  var start, end;
+
+  if (galleryShowAll) {
+    start = 0;
+    end = galleryImages.length;
+  } else {
+    start = page * ITEMS_PER_PAGE;
+    end = Math.min(start + ITEMS_PER_PAGE, galleryImages.length);
+  }
+
   for (var i = start; i < end; i++) {
     var item = galleryImages[i];
-    var delay = (i - start) + 1;
     var card = document.createElement('div');
-    // Skip animation on first load to prevent flicker
-    if (galleryFirstRender) {
+
+    if (galleryShowAll) {
+      // In "show all" mode, use scroll-triggered animations
+      card.className = 'treat-card scroll-reveal';
+      card.style.transitionDelay = ((i % 3) * 0.1) + 's';
+    } else if (galleryFirstRender) {
       card.className = 'treat-card';
     } else {
-      card.className = 'treat-card card-enter';
-      card.style.animationDelay = (delay * 0.08) + 's';
+      card.className = 'treat-card scroll-reveal';
     }
+
     card.innerHTML =
       '<div class="img-wrapper"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy"></div>' +
       '<div class="card-overlay"><h3>' + item.title + '</h3><p>' + item.desc + '</p></div>';
@@ -170,6 +191,11 @@ function buildCards(grid, page) {
       openLightbox(parseInt(this.dataset.index));
     });
     grid.appendChild(card);
+
+    // Observe for scroll animation
+    if (card.classList.contains('scroll-reveal')) {
+      cardObserver.observe(card);
+    }
   }
   galleryFirstRender = false;
 }
@@ -184,6 +210,18 @@ document.getElementById('galleryNext').addEventListener('click', function() {
   if (galleryAnimating) return;
   galleryPage = (galleryPage + 1) % totalGalleryPages();
   renderGalleryPage(galleryPage, 'next');
+});
+
+// See All / Show Less toggle
+document.getElementById('galleryToggle').addEventListener('click', function() {
+  galleryShowAll = !galleryShowAll;
+  this.textContent = galleryShowAll ? 'Show Less' : 'See All';
+  galleryPage = 0;
+  renderGalleryPage(0, null);
+  // Scroll to gallery top if showing less
+  if (!galleryShowAll) {
+    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 // Initial render — fade in after cards are built
