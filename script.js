@@ -94,10 +94,9 @@ var galleryShowAll = false;
 
 function getItemsPerPage() {
   var w = window.innerWidth;
-  if (w >= 1280) return 6;
-  if (w >= 900) return 4;
-  if (w >= 500) return 2;
-  return 1;
+  if (w >= 1024) return 6;  // 3 cols x 2 rows
+  if (w >= 640) return 4;   // 2 cols x 2 rows
+  return 2;                 // 1 col x 2 rows
 }
 
 function totalGalleryPages() {
