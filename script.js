@@ -107,11 +107,19 @@ galleryImages.forEach(function(item) {
   preloadImage(item.src);
 });
 
+var CARD_MIN_WIDTH = 180;
+var GRID_GAP = 24; // 1.5rem
+
+function getColumns() {
+  var grid = document.getElementById('galleryGrid');
+  var gridWidth = grid.clientWidth;
+  // How many columns fit: each column needs CARD_MIN_WIDTH, plus gaps between them
+  var cols = Math.floor((gridWidth + GRID_GAP) / (CARD_MIN_WIDTH + GRID_GAP));
+  return Math.max(cols, 1);
+}
+
 function getItemsPerPage() {
-  var w = window.innerWidth;
-  if (w >= 1024) return 6;
-  if (w >= 640) return 4;
-  return 2;
+  return getColumns() * 2; // always 2 rows
 }
 
 function totalGalleryPages() {

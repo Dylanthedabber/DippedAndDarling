@@ -396,19 +396,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 }
 .gallery-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
 .gallery-grid.loaded {
   opacity: 1;
-}
-@media (min-width: 640px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (min-width: 1024px) {
-  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 .treat-card {
   position: relative;
