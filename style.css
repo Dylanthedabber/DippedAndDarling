@@ -1837,6 +1837,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
   .services-grid { gap: 0.75rem; }
   .footer-grid { text-align: center; }
   .footer-brand .brand-row { justify-content: center; }
+  .footer-brand .certified { justify-content: center; }
   .footer-links nav { align-items: center; }
   .footer-connect .connect-links { align-items: center; }
   .footer-social { justify-content: center; }

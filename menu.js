@@ -18,19 +18,6 @@ var menuData = [
     ]
   },
   {
-    name: 'Breakable Heart Bento Box',
-    items: [
-      { name: 'Chocolate Breakable Heart', price: '$55' },
-      { name: 'Includes Ferrero Rocher & Hershey Kisses inside + 6 Chocolate Covered Strawberries', price: '' },
-    ]
-  },
-  {
-    name: 'Heart Strawberry Box',
-    items: [
-      { name: '6 Chocolate Covered Strawberries + 4 Chocolate Covered Pretzel Twists', price: '$45' },
-    ]
-  },
-  {
     name: 'Party Showcase',
     items: [
       { name: '6 Dozen Mixed Dipped Treats (Strawberries, Pretzels & more)', price: 'Contact for pricing' },
