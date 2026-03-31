@@ -625,6 +625,7 @@ function handleFormSubmit(e) {
 
   if (!name) { showError('name', 'Name is required'); valid = false; }
   if (!email) { showError('email', 'Email is required'); valid = false; }
+  if (!eventDate) { showError('eventDate', 'Event date is required'); valid = false; }
   if (deliveryMethod === 'delivery' && !address) { showError('address', 'Delivery address is required'); valid = false; }
 
   var cartKeys = Object.keys(cart);
@@ -659,15 +660,17 @@ function handleFormSubmit(e) {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Sending…';
 
-  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+  var templateParams = {
     name: name,
     email: email,
     treats: orderLines || '(Custom order - see details)',
     delivery: deliveryMethod === 'pickup' ? 'Pickup' : 'Delivery',
     address: address || 'N/A',
-    date: eventDate || 'Not specified',
+    date: eventDate,
     details: customDetails || 'None'
-  }).then(function() {
+  };
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams).then(function() {
     showToast('Order Sent!', 'Thank you! We\'ll be in touch soon.', false);
     document.getElementById('orderForm').reset();
     cart = {};

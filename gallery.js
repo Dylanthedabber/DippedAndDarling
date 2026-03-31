@@ -43,7 +43,7 @@ var galleryImages = [
 
   // Lightning McQueen CARS Set
   { src: 'images/gallery-cars-theme-treat-box.webp',          title: 'Lightning McQueen CARS Set',              desc: 'Lightning McQueen Cars themed treat box',                                        section: 'party-packages' },
-  { src: 'images/gallery-cars-theme-treat-box-2.webp',        title: 'Lightning McQueen CARS Set — Detail',     desc: 'Lightning McQueen Cars themed treat box detail',                                 section: 'party-packages' },
+  { src: 'images/gallery-cars-theme-treat-box-2.webp',        title: 'Lightning McQueen CARS Set - Detail',     desc: 'Lightning McQueen Cars themed treat box detail',                                 section: 'party-packages' },
   { src: 'images/gallery-cars-theme-cake.webp',               title: 'Lightning McQueen CARS Cake',             desc: 'Lightning McQueen Cars themed cake',                                             section: 'party-packages' },
 
   // NOTE: Orange and White Einstein Moving Company set — add image as gallery-einstein-set.webp and uncomment:
@@ -55,7 +55,7 @@ var galleryImages = [
 
   // Blue Marble (continued from featured)
   { src: 'images/gallery-blue-marble-strawberries.webp',      title: 'Blue Marble Strawberries',                desc: 'Stunning blue marble hand dipped strawberries',                                  section: 'treats-dozen' },
-  { src: 'images/gallery-blue-marble-strawberries-2.webp',    title: 'Blue Marble Strawberries — Box',          desc: 'Stunning blue marble hand dipped strawberries in a box',                         section: 'treats-dozen' },
+  { src: 'images/gallery-blue-marble-strawberries-2.webp',    title: 'Blue Marble Strawberries - Box',          desc: 'Stunning blue marble hand dipped strawberries in a box',                         section: 'treats-dozen' },
 
   // Milk & Classic Chocolate
   { src: 'images/gallery-milk-chocolate-strawberries.webp',   title: 'Milk Chocolate Strawberries',             desc: 'Classic milk chocolate hand dipped strawberries',                                section: 'treats-dozen' },
@@ -72,7 +72,7 @@ var galleryImages = [
   { src: 'images/gallery-purple-peach-birthday-strawberries.webp', title: 'Purple & Peach Birthday Strawberries', desc: 'Purple and peach birthday strawberries with number toppers',                section: 'treats-dozen' },
   { src: 'images/gallery-corporate-branded-treats.webp',      title: 'Corporate Branded Treats',                desc: 'Custom branded hand dipped treats for corporate events',                          section: 'treats-dozen' },
   { src: 'images/gallery-wedding-bride-groom-strawberries-3.webp', title: 'Wedding Strawberries',               desc: 'Elegant bride and groom themed wedding strawberries',                            section: 'treats-dozen' },
-  { src: 'images/gallery-wedding-strawberries-closeup.webp',  title: 'Wedding Strawberries — Closeup',          desc: 'Closeup of elegantly decorated wedding strawberries',                            section: 'treats-dozen' },
+  { src: 'images/gallery-wedding-strawberries-closeup.webp',  title: 'Wedding Strawberries - Closeup',          desc: 'Closeup of elegantly decorated wedding strawberries',                            section: 'treats-dozen' },
 
   // Pretzels
   { src: 'images/gallery-pink-gold-pretzel-rods.webp',        title: 'Pink & Gold Pretzel Rods',                desc: 'Pink and gold hand dipped pretzel rods with bow accents',                        section: 'treats-dozen' },
@@ -126,12 +126,12 @@ var galleryImages = [
 
   // Thanksgiving / Fall
   { src: 'images/gallery-fall-treat-box.webp',                 title: 'Fall Treat Box',                         desc: 'Autumn treat box with pumpkin cake pops, daisies, and pretzel rods',              section: 'seasonal' },
-  { src: 'images/gallery-fall-treat-box-2.webp',               title: 'Fall Treat Box — Detail',                desc: 'Autumn themed treat box detail',                                                 section: 'seasonal' },
+  { src: 'images/gallery-fall-treat-box-2.webp',               title: 'Fall Treat Box - Detail',                desc: 'Autumn themed treat box detail',                                                 section: 'seasonal' },
 
   // Halloween
   { src: 'images/gallery-halloween-hot-cocoa-bombs.webp',      title: 'Halloween Hot Cocoa Bombs',              desc: 'Pink Halloween hot cocoa bombs with pumpkin, BOO, mummy, and spider designs',    section: 'seasonal' },
   { src: 'images/gallery-dia-de-muertos-strawberries.webp',    title: 'Dia de Muertos Strawberries',            desc: 'Sugar skull themed strawberries for Day of the Dead celebrations',               section: 'seasonal' },
-  { src: 'images/gallery-dia-de-muertos-strawberries-2.webp', title: 'Dia de Muertos Strawberries — Set',      desc: 'Sugar skull themed strawberry set for Day of the Dead',                          section: 'seasonal' },
+  { src: 'images/gallery-dia-de-muertos-strawberries-2.webp', title: 'Dia de Muertos Strawberries - Set',      desc: 'Sugar skull themed strawberry set for Day of the Dead',                          section: 'seasonal' },
 ];
 
 // ============================================================

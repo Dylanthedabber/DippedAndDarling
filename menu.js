@@ -4,32 +4,22 @@
 // ============================================================
 var menuData = [
   {
-    name: 'Chocolate Covered Strawberries',
+    name: 'Individual Treats (per dozen)',
     items: [
-      { name: 'Half Dozen (6)', price: '$22' },
-      { name: 'Full Dozen (12)', price: '$45' },
+      { name: 'Cakesicles (12)',          price: '$50+' },
+      { name: 'Strawberries (12)',         price: '$45+' },
+      { name: 'Rice Krispie Treats (12)', price: '$45+' },
+      { name: 'Oreo Pucks (12)',           price: '$35+' },
+      { name: 'Pretzel Twists (12)',       price: '$35+' },
+      { name: 'Pretzel Rods (12)',         price: '$35+' },
     ]
   },
   {
-    name: 'Cakesicles',
+    name: 'Party Sets',
     items: [
-      { name: 'Single Cakesicle', price: '$6' },
-      { name: 'Cakesicle Trio (3)', price: '$15' },
-    ]
-  },
-  {
-    name: 'Party Showcase',
-    items: [
-      { name: '6 Dozen Mixed Dipped Treats (Strawberries, Pretzels & more)', price: 'Contact for pricing' },
-      { name: 'Custom colors & quantities available', price: '' },
-    ]
-  },
-  {
-    name: 'Custom Orders',
-    items: [
-      { name: 'Themed Treat Boxes', price: 'Contact for pricing' },
-      { name: 'Wedding & Bridal Party', price: 'Contact for pricing' },
-      { name: 'Birthday & Celebration', price: 'Contact for pricing' },
+      { name: '🍓 The Signature Set (4 dozen)',    price: '$185' },
+      { name: '🌟 The Party Favorite (6 dozen)',   price: '$275' },
+      { name: '🎀 The Table Showcase (8 dozen)',   price: '$360' },
     ]
   },
 ];

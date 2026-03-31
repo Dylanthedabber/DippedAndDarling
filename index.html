@@ -327,13 +327,15 @@
             </div>
 
             <div class="form-group">
-              <label for="eventDate">Event Date (Optional)</label>
+              <label for="eventDate">Event Date *</label>
               <input type="date" id="eventDate" name="eventDate" autocomplete="off">
+              <p class="error-text" id="eventDateError" style="display:none"></p>
             </div>
             <div class="form-group">
               <label for="customDetails">Additional Details (Optional)</label>
               <textarea id="customDetails" name="customDetails" rows="3" placeholder="Custom themes, colors, dietary restrictions, or special requests..." autocomplete="off"></textarea>
             </div>
+
             <button type="submit" class="submit-btn">Submit Order Request</button>
           </form>
         </div>
