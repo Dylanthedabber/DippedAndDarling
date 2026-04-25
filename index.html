@@ -33,6 +33,7 @@
           <a href="#menu">Menu</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+          <a href="#order-policies">Terms &amp; Conditions</a>
           <a href="tel:9405978453" class="cta-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             Call Us
@@ -56,6 +57,7 @@
         <a href="#menu" onclick="closeMobileMenu()">Menu</a>
         <a href="#about" onclick="closeMobileMenu()">About</a>
         <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+        <a href="#order-policies" onclick="closeMobileMenu()">Terms &amp; Conditions</a>
         <div class="contact-divider">
           <p>Contact Us</p>
           <a href="tel:9405978453">
@@ -334,6 +336,83 @@
             <div class="form-group">
               <label for="customDetails">Additional Details (Optional)</label>
               <textarea id="customDetails" name="customDetails" rows="3" placeholder="Custom themes, colors, dietary restrictions, or special requests..." autocomplete="off"></textarea>
+            </div>
+
+            <div class="form-policies-wrapper" id="order-policies">
+              <button type="button" class="form-policies-toggle" id="policiesToggle" aria-expanded="false">
+                <span>Order Policies</span>
+                <svg class="toggle-chevron" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="form-policies-body" id="policiesBody">
+              <div class="form-policies">
+
+              <details class="policy-item">
+                <summary class="policy-title">Texas Cottage Food Disclosure</summary>
+                <div class="policy-body">
+                  <p>Dipped &amp; Darling operates under the Texas Cottage Food Law. All products are prepared in a home kitchen that is not inspected by the Texas Department of State Health Services or a local health department.</p>
+                  <p>Products may contain or come into contact with common allergens including milk, eggs, wheat, soy, peanuts, and tree nuts. We do not guarantee an allergen-free environment. Customers are responsible for communicating any allergies prior to ordering.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Orders &amp; Lead Time</summary>
+                <div class="policy-body">
+                  <p>A minimum of 7 days' notice is required for custom orders. Short-notice requests may be accepted at our discretion and may be subject to a rush fee based on order size, complexity, and turnaround time.</p>
+                  <p>All orders must be reviewed and approved. Order requests do not guarantee availability, and we reserve the right to decline any request. Minimum quantities apply to all custom items.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Payment Terms</summary>
+                <div class="policy-body">
+                  <p>A 50% non-refundable deposit is required to secure your order date. Orders are not confirmed until the deposit is received. The remaining balance is due 24 hours prior to pickup or delivery. Failure to complete payment may result in cancellation without refund of the deposit.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Custom Designs &amp; Mock-Ups</summary>
+                <div class="policy-body">
+                  <p>Custom orders include a digital mock-up for approval prior to production. One round of minor revisions is included. Additional revisions may be subject to a design fee. Once approved, no further changes are guaranteed. Final products may vary slightly due to the handmade nature of our items.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Changes &amp; Cancellations</summary>
+                <div class="policy-body">
+                  <p>Changes must be requested at least 72 hours prior to pickup and are not guaranteed. Deposits are non-refundable. Due to the perishable nature of our products, all sales are final.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Pickup, Delivery &amp; Responsibility</summary>
+                <div class="policy-body">
+                  <p>Customers are responsible for arriving at the agreed pickup time. Once an order has been picked up or delivered, full responsibility transfers to the customer, including storage, handling, and transport. We are not responsible for damage, melting, or quality changes after release.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Design Disclaimer</summary>
+                <div class="policy-body">
+                  <p>Inspiration photos are used for reference only. Exact replication is not guaranteed. Minor variations are expected with handmade products and do not qualify for refunds or replacements.</p>
+                </div>
+              </details>
+
+              <details class="policy-item">
+                <summary class="policy-title">Limitation of Liability</summary>
+                <div class="policy-body">
+                  <p>Dipped &amp; Darling is not responsible for injury, illness, allergic reactions, or damages resulting from the consumption or handling of products after they have been received.</p>
+                </div>
+              </details>
+              </div>
+              </div>
+            </div>
+
+            <div class="form-group policy-agree-group">
+              <label class="policy-agree-label">
+                <input type="checkbox" id="policyAgree" name="policyAgree">
+                <span>I have read and accepted <a href="#order-policies" class="policy-link">the terms &amp; conditions</a> *</span>
+              </label>
+              <p class="error-text" id="policyAgreeError" style="display:none"></p>
             </div>
 
             <button type="submit" class="submit-btn">Submit Order Request</button>

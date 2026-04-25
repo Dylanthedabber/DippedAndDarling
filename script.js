@@ -565,6 +565,48 @@ function loadFormData() {
   }
 }
 
+// Order Policies toggle
+var policiesToggle = document.getElementById('policiesToggle');
+var policiesBody = document.getElementById('policiesBody');
+if (policiesToggle && policiesBody) {
+  policiesToggle.addEventListener('click', function() {
+    var isOpen = policiesBody.classList.contains('open');
+    if (isOpen) {
+      policiesBody.style.maxHeight = policiesBody.scrollHeight + 'px';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          policiesBody.style.maxHeight = '0';
+        });
+      });
+      policiesBody.classList.remove('open');
+      policiesToggle.classList.remove('open');
+      policiesToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      policiesBody.style.maxHeight = policiesBody.scrollHeight + 'px';
+      policiesBody.classList.add('open');
+      policiesToggle.classList.add('open');
+      policiesToggle.setAttribute('aria-expanded', 'true');
+      policiesBody.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName === 'max-height') {
+          policiesBody.style.maxHeight = 'none';
+          policiesBody.removeEventListener('transitionend', onEnd);
+        }
+      });
+    }
+  });
+}
+
+// Clear policy agree error on check
+var policyAgreeEl = document.getElementById('policyAgree');
+if (policyAgreeEl) {
+  policyAgreeEl.addEventListener('change', function() {
+    if (this.checked) {
+      var errEl = document.getElementById('policyAgreeError');
+      if (errEl) { errEl.style.display = 'none'; errEl.textContent = ''; }
+    }
+  });
+}
+
 // Input error clearing
 document.querySelectorAll('#orderForm input, #orderForm textarea').forEach(function(input) {
   input.addEventListener('input', function() {
@@ -623,10 +665,13 @@ function handleFormSubmit(e) {
     address = document.getElementById('address').value.trim();
   }
 
+  var policyAgree = document.getElementById('policyAgree');
+
   if (!name) { showError('name', 'Name is required'); valid = false; }
   if (!email) { showError('email', 'Email is required'); valid = false; }
   if (!eventDate) { showError('eventDate', 'Event date is required'); valid = false; }
   if (deliveryMethod === 'delivery' && !address) { showError('address', 'Delivery address is required'); valid = false; }
+  if (!policyAgree || !policyAgree.checked) { showError('policyAgree', 'Please read and agree to the policies to continue'); valid = false; }
 
   var cartKeys = Object.keys(cart);
   if (cartKeys.length === 0 && !customDetails) {
